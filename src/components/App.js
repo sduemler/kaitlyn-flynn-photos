@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ImageList from "./ImageList";
 
 const baseURL = 'https://www.flickr.com/services/rest/';
 const flickrMethod = '?method=flickr.photosets.getPhotos';
@@ -22,8 +23,12 @@ class App extends React.Component {
         const response = await axios.get(url);
         //console.log(response);
         this.setState( {images: response.data.photoset.photo});
-        this.setState({photoUrls: this.getPhotoURL()});
+        //this.setState({photoUrls: this.getPhotoURL()});
         //console.log(this.state.photoUrls);
+    };
+
+    getPhotoSizes = async (images) => {
+          const response = await axios.get
     };
 
     getPhotoURL = () => {
@@ -34,9 +39,11 @@ class App extends React.Component {
     };
 
     render() {
+        //console.log(this.state.images[0].id);
         return (
-            //<div>Here there will be images!</div>
-            <img alt="first" src={this.state.photoUrls}/>
+            <div className="ui container" style={{marginTop:'10px'}}>
+                <ImageList images={this.state.images} />
+            </div>
         );
     }
 
