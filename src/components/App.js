@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ImageList from "./ImageList";
+import Header from './Header/Header';
 
 const baseURL = 'https://www.flickr.com/services/rest/';
 const flickrMethod = '?method=flickr.photosets.getPhotos';
@@ -42,6 +43,7 @@ class App extends React.Component {
         //console.log(this.state.images[0].id);
         return (
             <div className="ui container" style={{marginTop:'10px'}}>
+                <Header />
                 <ImageList images={this.state.images} />
             </div>
         );
