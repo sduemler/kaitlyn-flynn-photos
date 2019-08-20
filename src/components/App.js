@@ -42,9 +42,13 @@ class App extends React.Component {
     render() {
         //console.log(this.state.images[0].id);
         return (
-            <div className="ui container" style={{marginTop:'10px'}}>
-                <Header />
-                <ImageList images={this.state.images} />
+            <div className="ui two column stackable grid container" style={{marginTop:'10px'}}>
+                <div className="four wide column">
+                    <Header />
+                </div>
+                <div className="twelve wide column">
+                    <ImageList images={this.state.images} />\
+                </div>
             </div>
         );
     }
