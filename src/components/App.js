@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import ImageList from "./ImageList";
 import Header from './Header/Header';
+import Gallery from "react-photo-gallery";
+import PhotoList from "./PhotoList";
 
 const baseURL = 'https://www.flickr.com/services/rest/';
 const flickrMethod = '?method=flickr.photosets.getPhotos';
@@ -22,32 +24,42 @@ class App extends React.Component {
 
     getPhotos = async () => {
         const response = await axios.get(url);
-        //console.log(response);
         this.setState( {images: response.data.photoset.photo});
-        //this.setState({photoUrls: this.getPhotoURL()});
-        //console.log(this.state.photoUrls);
     };
 
-    getPhotoSizes = async (images) => {
-          const response = await axios.get
+    getPhotoURLList = () => {
+        console.log(this.state.images);
+        let photoURLs = [];
+        for(let i = 0; i < this.state.images.length; i++){
+            let urlString = `https://farm${this.state.images[i].farm}.staticflickr.com/`;
+            urlString += `${this.state.images[i].server}/${this.state.images[i].id}_${this.state.images[i].secret}.jpg`;
+            photoURLs.push(urlString);
+        }
+        return photoURLs;
     };
 
-    getPhotoURL = () => {
-        let urlString = `https://farm${this.state.images[0].farm}.staticflickr.com/`;
-        urlString += `${this.state.images[0].server}/${this.state.images[0].id}_${this.state.images[0].secret}.jpg`;
-        //console.log(urlString);
-        return urlString;
+    getPhotoList = () => {
+        let photos = [];
+        const photoURLs = this.getPhotoURLList();
+        for(let i = 0; i < this.state.images.length; i++){
+            let photo = {
+                src: photoURLs[i],
+                width: 4,
+                height: 3
+            };
+            photos.push(photo);
+        }
+        return photos;
     };
 
     render() {
-        //console.log(this.state.images[0].id);
         return (
-            <div className="ui two column stackable grid container" style={{marginTop:'10px'}}>
-                <div className="four wide column">
+            <div className="ui fluid container" style={{marginTop:'10px'}}>
+                <div className="column">
                     <Header />
                 </div>
-                <div className="twelve wide column">
-                    <ImageList images={this.state.images} />\
+                <div className="column">
+                    <Gallery photos={this.getPhotoList()} />
                 </div>
             </div>
         );
