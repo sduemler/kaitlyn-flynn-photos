@@ -1,28 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import ImageList from "./ImageList";
-import Header from './Header/Header';
-import Gallery from "react-photo-gallery";
+import Navigation from "./Navigation";
 import {withRouter, NavLink, BrowserRouter, Route} from 'react-router-dom';
-import {Menu} from 'semantic-ui-react';
-
-const baseURL = 'https://www.flickr.com/services/rest/';
-const flickrMethodGetPhotos = '?method=flickr.photosets.getPhotos';
-const flickrMethodGetSize = '?method=flickr.photos.getSizes';
-const api_key = `api_key=${process.env.REACT_APP_FLICKR_API_KEY}`;
-const user_id = 'user_id=160810395@N08&';
-const photoset_id = 'photoset_id=72157710272039597';
-const urlEnd = 'format=json&nojsoncallback=1';
-const url = baseURL + flickrMethodGetPhotos + '&' + api_key + '&' + user_id + '&' + photoset_id + '&' + urlEnd;
-
-function Navigation() {
-    return (
-        <Menu style={{height: 60}} fixed="top">
-            <Menu.Item as={NavLink} exact to="/" content="Home"/>
-            <Menu.Item as={NavLink} to="/about" content="About"/>
-        </Menu>
-    )
-}
 
 function Home() {
     return <ImageList />
@@ -32,14 +11,19 @@ function About() {
     return "About";
 }
 
+function Contact() {
+    return "Contact";
+}
+
 function App() {
     return (
-        <div style={{width: "100vw", height: "vw", overflow: "hidden"}}>
+        <div style={{width: "100vw", height: "vw"}}>
             <BrowserRouter>
                 <Navigation/>
                 <div style={{width: "100vw", height: "calc(100vh - 60px)", marginTop: 60}}>
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
+                    <Route path="/contact" component={Contact}/>
                 </div>
             </BrowserRouter>
         </div>

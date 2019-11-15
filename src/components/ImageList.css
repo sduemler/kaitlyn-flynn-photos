@@ -1,9 +1,0 @@
-.image-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30vw, 31vw));
-    grid-auto-rows: 1.25vh;
-}
-
-.image-list img {
-    width: 30vw;
-}

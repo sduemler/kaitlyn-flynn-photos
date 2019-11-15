@@ -1,8 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './ImageList.css';
 import Gallery from "react-photo-gallery";
-import ImageCard from "./ImageCard";
 import axios from "axios";
 import qs from 'query-string';
 import {Loader, Message} from 'semantic-ui-react';
@@ -83,65 +80,5 @@ function ImageList() {
 
     return <Gallery photos={galleryPhotos} direction={"column"}/>
 }
-
-// const ImageList = (props) => {
-//   const images = props.images.map((image) => {
-//       return <ImageCard key={image.id} image={image} />
-//   });
-//
-//   return <div className="image-list">{images}</div>
-// };
-// class ImageList extends React.Component {
-//     state = {images: []};
-//
-//     constructor(props){
-//         super(props);
-//         this.state = {images: props.images}
-//     }
-//
-//     getPhotoURLList = () => {
-//         let photosInfo = [];
-//         for(let i = 0; i < this.state.images.length; i++){
-//             let photoInfo = [];
-//             let urlString = `https://farm${this.state.images[i].farm}.staticflickr.com/`;
-//             urlString += `${this.state.images[i].server}/${this.state.images[i].id}_${this.state.images[i].secret}.jpg`;
-//             photoInfo.push(urlString);
-//             this.getPhotoSize(this.state.images[i].id).then((photoSize) => {
-//                 console.log(photoSize);
-//                 photoInfo.push(photoSize['width']);
-//                 photoInfo.push(photoSize['height']);
-//                 photosInfo.push(photoInfo);
-//             });
-//         }
-//         return photosInfo;
-//     };
-//
-//     getPhotoSize = async (photoId) => {
-//         const url = `${baseURL}${flickrMethodGetSize}&${api_key}&photo_id=${photoId}&${urlEnd}`;
-//         const response = await axios.get(url);
-//         return response.data.sizes.size[12];
-//     };
-//
-//     getPhotoList = () => {
-//         let photos = [];
-//         const photoInfo = this.getPhotoURLList();
-//         for(let i = 0; i < photoInfo.length; i++){
-//             console.log(photoInfo[i][1]);
-//             let photo = {
-//                 src: photoInfo[i][0],
-//                 width: photoInfo[i][1],
-//                 height: photoInfo[i][2]
-//             };
-//             photos.push(photo);
-//         }
-//         return photos;
-//     };
-//
-//     render() {
-//         return (
-//             <Gallery photos={this.getPhotoList()} />
-//         )
-//     }
-// }
 
 export default ImageList;
